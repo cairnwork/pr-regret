@@ -1,0 +1,211 @@
+{
+ "/repos/o/r/pulls?state=closed&sort=created&direction=desc&per_page=100&page=1": [
+  {
+   "number": 7,
+   "title": "Newest change",
+   "body": "",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-19T10:00:00Z",
+   "created_at": "2026-03-19T10:00:00Z",
+   "merge_commit_sha": "0000007000000700000070000007000000700000"
+  },
+  {
+   "number": 6,
+   "title": "Late fix for #3",
+   "body": "",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-12T10:00:00Z",
+   "created_at": "2026-03-12T10:00:00Z",
+   "merge_commit_sha": "0000006000000600000060000006000000600000"
+  },
+  {
+   "number": 5,
+   "title": "Docs",
+   "body": "mentions #3 for context",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-04T10:00:00Z",
+   "created_at": "2026-03-04T10:00:00Z",
+   "merge_commit_sha": "0000005000000500000050000005000000500000"
+  },
+  {
+   "number": 4,
+   "title": "Fix crash in parser (follow-up to #3)",
+   "body": "",
+   "user": {
+    "login": "copilot-swe-agent[bot]"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-05T10:00:00Z",
+   "created_at": "2026-03-05T10:00:00Z",
+   "merge_commit_sha": "0000004000000400000040000004000000400000"
+  },
+  {
+   "number": 3,
+   "title": "Add parser",
+   "body": "Fix typos (#3)",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-02T10:00:00Z",
+   "created_at": "2026-03-02T10:00:00Z",
+   "merge_commit_sha": "0000003000000300000030000003000000300000"
+  },
+  {
+   "number": 2,
+   "title": "Revert \"Add widget\"",
+   "body": "Reverts o/r#1",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-03T10:00:00Z",
+   "created_at": "2026-03-03T10:00:00Z",
+   "merge_commit_sha": "0000002000000200000020000002000000200000"
+  },
+  {
+   "number": 1,
+   "title": "Add widget",
+   "body": "",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "copilot/add-widget"
+   },
+   "merged_at": "2026-03-01T10:00:00Z",
+   "created_at": "2026-03-01T10:00:00Z",
+   "merge_commit_sha": "0000001000000100000010000001000000100000"
+  },
+  {
+   "number": 99,
+   "title": "Bump foo",
+   "body": "",
+   "user": {
+    "login": "dependabot[bot]"
+   },
+   "head": {
+    "ref": "dependabot/pip/foo"
+   },
+   "merged_at": "2026-03-04T10:00:00Z",
+   "created_at": "2026-03-04T10:00:00Z",
+   "merge_commit_sha": "0000099000009900000990000099000009900000"
+  },
+  {
+   "number": 50,
+   "title": "never merged",
+   "body": "",
+   "user": {
+    "login": "x"
+   },
+   "head": {
+    "ref": "z"
+   },
+   "merged_at": null,
+   "created_at": "2026-03-01T00:00:00Z"
+  },
+  {
+   "number": 10,
+   "title": "ancient",
+   "body": "",
+   "user": {
+    "login": "x"
+   },
+   "head": {
+    "ref": "z"
+   },
+   "merged_at": "2026-01-01T00:00:00Z",
+   "created_at": "2025-12-01T00:00:00Z"
+  }
+ ],
+ "/repos/o/r/commits?since=2026-03-01T00:00:00Z&until=2026-03-20T00:00:00Z&per_page=100&page=1": [
+  {
+   "sha": "cccccccccccccccccccccccccccccccccccccccc",
+   "commit": {
+    "committer": {
+     "date": "2026-03-06T09:00:00Z"
+    },
+    "message": "Revert \"Docs\"\n\nThis reverts commit 0000005000000500000050000005000000500000."
+   }
+  },
+  {
+   "sha": "dddddddddddddddddddddddddddddddddddddddd",
+   "commit": {
+    "committer": {
+     "date": "2026-03-07T09:00:00Z"
+    },
+    "message": "Hotfix: broke login after #1 landed"
+   }
+  }
+ ],
+ "/repos/o/r/pulls/1/files?per_page=100&page=1": [
+  {
+   "filename": "a.py"
+  },
+  {
+   "filename": "b.py"
+  }
+ ],
+ "/repos/o/r/pulls/2/files?per_page=100&page=1": [
+  {
+   "filename": "a.py"
+  }
+ ],
+ "/repos/o/r/pulls/3/files?per_page=100&page=1": [
+  {
+   "filename": "c.py"
+  },
+  {
+   "filename": "uv.lock"
+  }
+ ],
+ "/repos/o/r/pulls/4/files?per_page=100&page=1": [
+  {
+   "filename": "c.py"
+  },
+  {
+   "filename": "uv.lock"
+  }
+ ],
+ "/repos/o/r/pulls/5/files?per_page=100&page=1": [
+  {
+   "filename": "d.py"
+  }
+ ],
+ "/repos/o/r/pulls/6/files?per_page=100&page=1": [
+  {
+   "filename": "z.py"
+  }
+ ],
+ "/repos/o/r/pulls/7/files?per_page=100&page=1": [
+  {
+   "filename": "a.py"
+  }
+ ],
+ "/repos/o/r/pulls/99/files?per_page=100&page=1": [
+  {
+   "filename": "uv.lock"
+  }
+ ]
+}
