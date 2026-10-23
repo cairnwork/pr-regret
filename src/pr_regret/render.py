@@ -31,7 +31,7 @@ def render(res: dict, fmt: str = "text") -> str:
         res["merged_prs"] - res["immature_excluded"], res["immature_excluded"])
     nums = lambda rs: ", ".join("#%d" % r["pr"] for r in rs) or "none"
     if fmt == "markdown":
-        out = ["### %s" % head, "", "| signal | k/n | rate | Wilson 95%% |", "|---|---|---|---|"]
+        out = ["### %s" % head, "", "| signal | k/n | rate | Wilson 95% |", "|---|---|---|---|"]
         out += ["| %s | %s | %s | %s |" % r for r in rows]
         if srows:
             out += ["", "| revert or named fix by author class | k/n | rate | Wilson 95% |", "|---|---|---|---|"]

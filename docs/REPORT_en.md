@@ -1,46 +1,51 @@
-# What share of AI-written PRs get fixed or reverted within 7 days of merging?
+# Are AI-written PRs fixed or reverted within 7 days of merge? Three measurements, not to be mixed
 
-**Short answer: about 7-10% in the author's own 11-repo agent development setup, and automated merge gates caught almost none of them. Real use and human review did.**
+**Most visible result first:** in the public tool's runs on 3 open-source repos, **0 of 81 PRs flagged as agent-authored** left a revert or named-fix trace (95% upper bound 4.5%). The sample is small and the flag is a heuristic; this does not show that AI PRs are safer.
 
-## 1. Our own numbers
+The three sets of numbers below use **different definitions and must not be compared or combined**:
 
-In an agent development setup spanning 11 repositories, we looked at the 2,018 PRs merged between 2026-08-01 and 10-16 and asked: within 7 days of merge, did a later PR name it as a fix or revert it?
+| | Population | How decided | Number |
+|---|---|---|---|
+| A. Internal audit | 2,018 PRs in the author's own 11-repo agent development setup | model classification + re-check of "false completions" | confirmed lower bound 6.6%, estimate 7-10% |
+| B. Public tool | merged PRs of 3 open-source repos | zero-model, deterministic "trace rate" | 0.9%-2.4% |
+| C. External study | agentic PRs in an MSR 2026 study | contains a reverting commit | 2.66% |
 
-- **Confirmed lower bound: 133/2,018 = 6.6%** (Wilson 95% interval 5.6-7.8%); estimated true rate 7-10%. Main repo 6.9%, the other 10 repos 6.2%.
-- **Strictness of merge governance made no visible difference.** August 7.0%; September, under the heaviest governance, 6.9%. Per-repo rates are not monotone in governance strength and the intervals overlap.
-- **Who caught them:** real use 54, independent human review 27, live/wiring audit 10; automated gates almost none (core verification gate 0, CI 9).
-- **Daily tracking:** the same metric computed daily sits at about 6.0-6.2%; per-PR precision and recall are about 0.73 each, so only weekly rates should be read.
+## A. Internal audit (human re-checked, may be called a confirmed lower bound)
 
-Sources: "Repo family false completions, 8/1-10/16" (author's internal research note, 2026-10-17); "7-day fix/revert rate metric and incident evaluation set" (internal research note, 2026-10-19).
+PRs merged 2026-08-01 to 10-16; question: within 7 days of merge, did a later PR name it as something it fixes?
 
-**Method, and how the public tool differs.** The internal version first filters candidate follow-up PRs by keyword, then uses a model to classify whether the follow-up fixes the earlier PR, and a second model re-checks the positives. The public tool (`pr-regret`) **uses no model at all**, only deterministic signals: a revert pointing at the PR, a later PR or commit that names it as a fix, and same-file changes. It is therefore reproducible and more conservative; the two sets of numbers are not directly comparable. Internal limits: silent fixes are missed, one labeller per item, the last two periods were not yet 7 days old.
+- **Confirmed lower bound 133/2,018 = 6.6%** (Wilson 95% interval 5.6-7.8%); the audit's estimate of the true rate is 7-10%.
+- **The denominator includes PRs younger than 7 days (right-censoring).** Excluding the two newest periods gives 112/1,615 = 6.9% (5.8-8.3%); the conclusion holds.
+- **Who caught them:** real use / experiments 54, independent review (mostly AI reviewers) 27, unknown 26, live/wiring audit 10, CI 9, owner 5, other 2; **the core verification gate 0**.
+- **Governance strength:** the data cannot show that stricter merge governance lowers false completions (August 7.0%, September 6.9%; intervals across tiers overlap; repos with no required checks 13.1%, but only 61 PRs).
+- **Method:** keyword filter of follow-up PRs, one model first-pass label, positives re-checked once; one first-pass labeller per item. Limits: silent fixes are missed; per-PR attribution is noisy, the rate is more reliable than any single case.
 
-## 2. External reference
+Source: "Repo family false completions, 8/1-10/16" (author's internal research note, 2026-10-17).
 
-The MSR 2026 Mining Challenge paper "When AI Code Doesn't Stick: An Empirical Study on Reverted Changes Introduced by AI Coding Agents" (Oukay, Begoug, Chouchen, Ouni) studied 33,580 agentic PRs (AIDev dataset: Claude, Copilot, Cursor, Devin, OpenAI Codex) and found **2.66% contain at least one reverting commit**; by agent, OpenAI Codex 0.7% and GitHub Copilot 7.6%. Source page: https://2026.msrconf.org/details/msr-2026-mining-challenge/27/ .
+## B. Public tool: heuristic trace rate (not a lower bound)
 
-**The definitions differ, so do not compare directly.** That study measures reverts only; we measure reverts plus named fixes. How it decides that a PR was reverted, and whether there is a time window, we did not read in the paper's method section: **to be verified** (the arXiv version is also to be verified). Treat 2.66% and our revert column as same-order context only.
-
-## 3. Lower bounds from the public tool on open-source repositories
-
-We ran `pr-regret` (Apache-2.0, standard library only) on three public repos with visible coding-agent PRs, one month each (OpenHands half a month), on 2026-10-23:
+`pr-regret` (Apache-2.0, standard library, no model) looks for three traces only: a revert, a later PR/commit that names the PR as something it fixes, and same-file changes. Results on public repos, run 2026-10-23:
 
 | repo | merged PRs | reverts | named fixes | revert or named fix (95% interval) |
 |---|---|---|---|---|
-| dotnet/aspire (Aug) | 316 | 3 | 21 | 24 = 7.6% (5.2-11.1%) |
-| dotnet/aspnetcore (Aug) | 295 | 0 | 4 | 4 = 1.4% (0.5-3.4%) |
-| OpenHands/OpenHands (Sep 1-15) | 110 | 0 | 2 | 2 = 1.8% (0.5-6.4%) |
+| dotnet/aspire (2026-08) | 333 | 3 | 5 | 8 = 2.4% (1.2-4.7%) |
+| dotnet/aspnetcore (2026-08) | 308 | 0 | 3 | 3 = 1.0% (0.3-2.8%) |
+| OpenHands/OpenHands (2026-09-01..15) | 112 | 0 | 1 | 1 = 0.9% (0.2-4.9%) |
 
-Among PRs flagged as agent-authored (78 in total: 5 + 13 + 60), **none** left a trace; the 95% upper bound is 4.7%. The sample is too small to say agent PRs are safer; it says only that no deterministic trace was found. Same-file changes are a weak signal (40-79%, busy repos keep touching the same files), reported separately and never added to the rate. We hand-read 10 random named-fix hits: 4 were real fixes, 2 ambiguous, 4 were not; we then added rules excluding backports, release-branch PRs and changelog-style PRs (see `docs/VALIDATION.md`).
+Same-file changes are a weak signal (41-79%; busy repos keep touching the same files), reported separately and never added.
 
-## 4. How to read this
+**Why it is not a lower bound:** misses (silent fixes, fixes citing only an issue, defects found after 7 days) and false hits (keyword matches) both exist. On a different time window (2026-06) we drew 22 hits and had an independent labeller read them: 15 were real fixes or reverts (precision 68%, Wilson 95% interval 47-84%), 5 were not, 2 unclear; recall was not measured. So B is a reproducible trace signal, not a true rate.
 
-1. **Everything here is a lower bound.** Only traces people left (titles, bodies, commit messages, changed-file lists) are visible. Silent fixes, fixes that cite an issue rather than the PR, and defects found after 7 days are invisible. This is not the true false-completion rate.
-2. **Same order of magnitude, but no cross-repo comparison.** Our 6.6% lower bound, the public repos' 1.4-7.6% and the external 2.66% revert rate all sit at a single-digit percentage; repos, periods and definitions differ.
-3. **Why only real use and review catch them.** Merge gates check conditions at merge time (tests, rules, signatures); this class of defect usually shows up only when someone uses the change or reads the code. Of our 133 cases, 54 were found by real use and 27 by human review, automated gates about 0, and stricter governance did not lower the rate. Adding more pre-merge gates has limited payoff for this failure class; the better-supported direction is to make "done" wait for a witness from real use.
+## C. External study
 
-## 5. Next step
+The MSR 2026 Mining Challenge paper "When AI Code Doesn't Stick: An Empirical Study on Reverted Changes Introduced by AI Coding Agents" reports 2.66% (PRs containing a reverting commit); its definition differs from A and B and the numbers cannot be compared directly (we could not obtain the full text and cite only the abstract-level figure). Source page: https://2026.msrconf.org/details/msr-2026-mining-challenge/27/
 
-To make sure PRs merged to main are really complete and backed by evidence, see [Cairnwork](https://github.com/cairnwork/cairnwork) (our only main product).
+## How to read this
+
+1. A is a human-re-checked lower bound, B a heuristic signal, C another definition; they do not validate one another.
+2. Why only real use and review catch them: merge gates check conditions at merge time, while this class of defect usually shows up when someone uses the change or reads the code (in A, 54 cases by use, 27 by review, core gate 0). Evidence for adding more pre-merge gates against this failure class is limited; the better-supported direction is to make "done" wait for a witness from real use.
+3. Other limits: B covers 3 repos and 1-2 months; the AI-authored flag is a heuristic (author login, branch prefix, body marker); public repos differ from our setup.
+
+Related project: [Cairnwork](https://github.com/cairnwork/cairnwork).
 
 *Author: James3014. License: Apache-2.0.*

@@ -11,6 +11,7 @@ import os
 import shlex
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -37,8 +38,9 @@ def find_token() -> str | None:
 
 class Client:
     def __init__(self, repo: str, cache_dir: str | None = None, use_cache: bool = True,
-                 refresh: bool = False, token: str | None = None, transport=None):
+                 refresh: bool = False, token: str | None = None, transport=None, clock=None):
         self.repo = repo
+        self.clock = clock or time.time  # epoch seconds; injectable for tests
         self.calls = 0
         self.hits = 0
         self._transport = transport
@@ -55,15 +57,27 @@ class Client:
             self._path = d / (repo.replace("/", "-") + ".json")
             if self._path.exists() and not refresh:
                 try:
-                    self._cache = json.loads(self._path.read_text())
-                except (OSError, ValueError):
+                    raw = json.loads(self._path.read_text())
+                    if isinstance(raw, dict) and raw.get("v") == 2:
+                        self._cache = raw["e"]            # {path: [fetched_at, data]}
+                    elif isinstance(raw, dict):           # v1 cache: entries get the file's mtime
+                        mt = self._path.stat().st_mtime
+                        self._cache = {k: [mt, v] for k, v in raw.items()}
+                except (OSError, ValueError, KeyError):
                     self._cache = {}
 
     def save(self) -> None:
         if self._path and self._dirty:
-            self._path.parent.mkdir(parents=True, exist_ok=True)
+            self._path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+            try:
+                os.chmod(self._path.parent, 0o700)
+            except OSError:
+                pass
             tmp = self._path.with_suffix(".tmp")
-            tmp.write_text(json.dumps(self._cache))
+            fd = os.open(str(tmp), os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+            with os.fdopen(fd, "w") as f:
+                f.write(json.dumps({"v": 2, "e": self._cache}))
+            os.chmod(tmp, 0o600)
             tmp.replace(self._path)
             self._dirty = False
 
@@ -89,23 +103,36 @@ class Client:
                                   "and re-run; fetched pages are cached." % e.headers.get("x-ratelimit-reset"))
             raise GitHubError("GET %s -> HTTP %s" % (path, e.code))
 
-    def get(self, path: str):
-        if path in self._cache:
+    def get(self, path: str, fresh_after: float | None = None):
+        """Cached GET. `fresh_after` (epoch seconds): a cached entry fetched before that moment is
+        stale and refetched. Listings whose answer can still change (e.g. later fix PRs) pass the
+        end of the 7-day observation window here, so a first run made too early is never reused."""
+        ent = self._cache.get(path)
+        if ent is not None and (fresh_after is None or ent[0] >= fresh_after):
             self.hits += 1
-            return self._cache[path]
-        data = self._fetch(path)
+            return ent[1]
+        try:
+            data = self._fetch(path)
+        except GitHubError:
+            self.save()  # keep the pages already fetched so a re-run resumes from cache
+            raise
         self.calls += 1
-        self._cache[path] = data
+        self._cache[path] = [self.clock(), data]
         self._dirty = True
         if self.calls % 20 == 0:
             self.save()
         return data
 
-    def pages(self, path: str, per_page: int = 100, max_pages: int = 100):
-        """Yield pages (lists) until a short page. `path` may already contain a query string."""
+    def pages(self, path: str, per_page: int = 100, max_pages: int = 100, strict: bool = True,
+              fresh_after: float | None = None):
+        """Yield pages (lists) until a short page. `path` may already contain a query string.
+        If max_pages is reached with more data pending: raise (strict) instead of silently truncating."""
         sep = "&" if "?" in path else "?"
         for n in range(1, max_pages + 1):
-            page = self.get("%s%sper_page=%d&page=%d" % (path, sep, per_page, n))
+            page = self.get("%s%sper_page=%d&page=%d" % (path, sep, per_page, n), fresh_after)
             yield page
             if not isinstance(page, list) or len(page) < per_page:
                 return
+        if strict:
+            raise GitHubError("more than %d pages for %s; narrow --since/--until instead of "
+                              "accepting a silently truncated sample" % (max_pages, path.split("?")[0]))

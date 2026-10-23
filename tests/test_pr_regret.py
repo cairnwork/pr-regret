@@ -75,9 +75,9 @@ def test_same_file_weak_signal_ignores_lockfiles():
 def test_other_repo_reference_does_not_count():
     pr = {"number": 3, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "z" * 40,
           "title": "t", "body": ""}
-    ev = {"title": "Fix bug", "body": "closes other/repo#3"}
+    ev = {"title": "Fix bug", "body": "fixes other/repo#3"}
     assert not detect.named_fix_hits(ev, pr, "o/r")
-    assert detect.named_fix_hits({"title": "Fix bug", "body": "closes o/r#3"}, pr, "o/r")
+    assert detect.named_fix_hits({"title": "Fix bug o/r#3", "body": ""}, pr, "o/r")
     assert detect.named_fix_hits({"title": "Fix bug (#3)", "body": ""}, pr, "o/r")
     assert not detect.named_fix_hits({"title": "Fix bug (#33)", "body": ""}, pr, "o/r")
 
@@ -94,7 +94,7 @@ def test_immature_prs_excluded_from_denominator():
     assert res["immature_excluded"] == 1  # PR 7 merged one day before NOW
     assert 7 not in {r["pr"] for r in res["prs"] if r["mature"]}
     s = res["summary"]["revert_or_named_fix"]
-    assert (s["k"], s["n"]) == (3, 7)    # PRs 1, 3, 5 of 7 mature
+    assert (s["k"], s["n"]) == (3, 8)    # PRs 1, 3, 5 of 8 mature
 
 
 def test_author_filter_bot_and_dependabot_not_ai():
@@ -116,7 +116,7 @@ def test_output_contains_numbers_and_booleans_only():
         out = render.render(res, fmt)
         for secret in ("Add widget", "Add parser", "crash in parser", "login"):
             assert secret not in out
-    assert "LOWER BOUND" in render.render(res, "text")
+    assert "HEURISTIC TRACE RATE" in render.render(res, "text")
 
 
 def test_disk_cache_roundtrip(tmp_path):
@@ -143,3 +143,139 @@ def test_changelog_and_backport_events_are_not_fixes():
     assert detect.named_fix_hits({"title": "Fix thing", "body": "regression from #3"}, pr, "o/r")
 
     assert not detect.named_fix_hits({"title": "Fix crash on start (#3) (#40)", "body": ""}, pr, "o/r")
+
+
+def test_long_open_pr_is_found_and_listing_is_by_update():
+    r = by_pr(run())
+    assert 60 in r and r[60]["mature"]   # created 3 months before the window, merged inside it
+    assert 10 not in r                    # merged before the window
+
+
+def test_bot_filter_fetches_files_only_where_needed():
+    paths = []
+
+    def t(path):
+        paths.append(path)
+        return fake(path)
+
+    scan(Client("o/r", use_cache=False, transport=t), "2026-03-01", "2026-03-20", "bot", now=NOW)
+    fetched = {int(p.split("/pulls/")[1].split("/")[0]) for p in paths if "/files" in p}
+    assert {1, 4} <= fetched              # targets
+    assert 7 not in fetched               # merged 14 days later: never needed
+    res = scan(Client("o/r", use_cache=False, transport=fake), "2026-03-01", "2026-03-20", "bot", now=NOW)
+    # same-file compares against every merged PR of any author (PR 2 is human-authored)
+    assert by_pr(res)[1]["same_file"] is True
+
+
+def test_named_fix_needs_citation_and_keyword_on_one_line():
+    pr = {"number": 3, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "z" * 40,
+          "title": "t", "body": ""}
+    # keyword in the title, citation only somewhere else in the body: not a named fix
+    assert not detect.named_fix_hits({"title": "Fix parser", "body": "unrelated\nsee also #3"}, pr, "o/r")
+    assert detect.named_fix_hits({"title": "Fix parser (#3)", "body": ""}, pr, "o/r")
+
+
+def test_reference_boundaries():
+    rx = detect.ref_regex(12, "o/r")
+    assert not rx.search("uses C#12 features")
+    assert not rx.search("see foo#12")
+    assert not rx.search("#123 and #12abc")
+    assert not rx.search("https://github.com/other/repo/pull/12")
+    assert not rx.search("/pull/12")
+    assert rx.search("closes #12.") and rx.search("o/r#12")
+    assert rx.search("https://github.com/o/r/pull/12")
+    assert detect.any_ref_numbers("C#12 #5 https://github.com/a/b/pull/7 /pull/9") == {"5", "7"}
+    assert detect.any_ref_numbers("#5 https://github.com/a/b/pull/7 https://github.com/o/r/pull/8", "o/r") == {"5", "8"}
+
+
+def test_revert_title_needs_closing_quote():
+    pr = {"number": 8, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "q" * 40,
+          "title": "Add retry logic (#8)", "body": ""}
+    assert detect.revert_hits({"title": 'Revert "Add retry logic (#8)"', "body": ""}, pr)
+    assert not detect.revert_hits({"title": 'Revert "Add retry logic for sockets"', "body": ""}, pr)
+
+
+def test_cache_permissions_and_save_on_error(tmp_path):
+    import stat
+    from pr_regret.github import GitHubError
+    n = []
+
+    def t(path):
+        n.append(path)
+        if len(n) > 2:
+            raise GitHubError("boom")
+        return [] if "page=1" in path else []
+
+    cl = Client("o/r", cache_dir=str(tmp_path / "c"), transport=t)
+    cl.get("/a?page=1")
+    cl.get("/b?page=1")
+    with pytest.raises(GitHubError):
+        cl.get("/c")
+    f = tmp_path / "c" / "o-r.json"
+    assert f.exists() and "/a?page=1" in json.loads(f.read_text())["e"]      # saved before raising
+    assert stat.S_IMODE(f.stat().st_mode) == 0o600
+    assert stat.S_IMODE(f.parent.stat().st_mode) == 0o700
+
+
+def test_truncation_raises():
+    from pr_regret.github import GitHubError
+    cl = Client("o/r", use_cache=False, transport=lambda p: [1])
+    with pytest.raises(GitHubError):
+        list(cl.pages("/x", per_page=1, max_pages=3))
+    assert len(list(cl.pages("/x", per_page=1, max_pages=3, strict=False))) == 3
+
+
+def test_backport_checkbox_in_template_does_not_hide_a_fix():
+    pr = {"number": 3, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "z" * 40,
+          "title": "t", "body": ""}
+    body = "Regression from #3 broke start-up.\n\n- [ ] Needs backport to release branch?"
+    assert detect.named_fix_hits({"title": "Repair start-up", "body": body}, pr, "o/r")
+    assert not detect.named_fix_hits({"title": "Fix start-up", "body": "Backport of #3 fix"}, pr, "o/r")
+
+
+def test_other_repo_urls_do_not_trigger_changelog_cutoff():
+    pr = {"number": 3, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "z" * 40,
+          "title": "t", "body": ""}
+    urls = " ".join("https://github.com/other/x/pull/%d" % i for i in range(100, 110))
+    assert detect.named_fix_hits({"title": "Fix start-up (#3)", "body": urls}, pr, "o/r")
+
+
+def test_stale_cache_listing_is_refetched_after_window_closes(tmp_path):
+    """First run is too early (window still open, fix PR not merged yet); a later run must not
+    reuse that listing and silently report 0."""
+    early = json.loads(json.dumps(FX))
+    key = "/repos/o/r/pulls?state=closed&sort=updated&direction=desc&per_page=100&page=1"
+    late_listing = FX[key]
+    early[key] = [x for x in late_listing if x["number"] not in (2, 6, 7)]  # revert PR 2 not merged yet
+    t1 = datetime(2026, 3, 4, tzinfo=timezone.utc)   # before PR1 + 7 days
+    t2 = datetime(2026, 4, 2, tzinfo=timezone.utc)   # after until + 7 days
+    cdir = str(tmp_path)
+
+    def run_at(fx, when, **kw):
+        def tr(path):
+            return fx.get(path, [])
+        cl = Client("o/r", cache_dir=cdir, transport=tr, clock=lambda: when.timestamp(), **kw)
+        return scan(cl, "2026-03-01", "2026-03-20", now=when), cl
+
+    r1, _ = run_at(early, t1)
+    assert all(not r["mature"] for r in r1["prs"])          # nothing mature yet: no verdicts
+    r2, cl2 = run_at(FX, t2)                                 # listing was fetched at t1 < until+7d: refetched
+    assert by_pr(r2)[1]["revert"] is True
+    r3, cl3 = run_at(FX, t2)                                 # now valid: fully served from cache
+    assert cl3.calls == 0 and by_pr(r3)[1]["revert"] is True
+    r4, cl4 = run_at(FX, t2, refresh=True)                   # --refresh ignores the cache
+    assert cl4.calls > 0 and by_pr(r4)[1]["revert"] is True
+
+
+def test_precision_rules_from_hand_labelling():
+    pr = {"number": 3, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "z" * 40,
+          "title": "t", "body": ""}
+    # "follow-up" alone is a feature extension, not a repair
+    assert not detect.named_fix_hits({"title": "Add End mode", "body": "Follow-up to #3, extending the same approach."}, pr, "o/r")
+    # release PR listing a conventional-commit "fix" line
+    rel = {"title": "chore(main): release 1.7.2",
+           "body": "* fix(e2e): do x by @a in https://github.com/o/r/pull/3"}
+    assert not detect.named_fix_hits(rel, pr, "o/r")
+    # changelog-style line inside an ordinary PR is skipped as well
+    assert not detect.named_fix_hits({"title": "Docs", "body": "* fix: y by @b in https://github.com/o/r/pull/3"}, pr, "o/r")
+    assert detect.named_fix_hits({"title": "Fix the crash caused by #3", "body": ""}, pr, "o/r")

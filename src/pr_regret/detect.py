@@ -3,8 +3,9 @@
 Records
   PR:     dict(number, merged_at: datetime, merge_sha, title, body, author, head_ref, files: set|None)
   Commit: dict(sha, date: datetime, message)
-All detectors answer "within WINDOW after merge" and are lower bounds: they only see
-traces people left in titles, bodies, commit messages and changed-file lists.
+All detectors answer "within WINDOW after merge". They are heuristics over traces people left
+in titles, bodies, commit messages and changed-file lists: they can miss silent fixes and can
+also fire on text that is not really a fix, so the result is a heuristic trace rate, not a bound.
 """
 from __future__ import annotations
 
@@ -14,12 +15,15 @@ from datetime import datetime, timedelta
 WINDOW = timedelta(days=7)
 
 FIX_RE = re.compile(
-    r"\b(fix(?:es|ed|ing|up)?|hotfix|regress(?:ion|ions|ed|es)?|follow(?:s|ed)?[- ]?ups?|"
-    r"follow(?:s|ed)? up|broke|broken|breaks|oops)\b",
+    r"\b(fix(?:es|ed|ing|up)?|hotfix|regress(?:ion|ions|ed|es)?|broke|broken|breaks|oops)\b",
     re.I,
 )
+# "follow-up to #N" is deliberately NOT a keyword: in a hand-labelled sample it was mostly a feature
+# extension, not a repair.
+RELEASE_EVENT_RE = re.compile(r"^\W*(?:chore(?:\([^)]*\))?:\s*)?(?:release|bump version|version bump)\b", re.I)
+CHANGELOG_LINE_RE = re.compile(r"\bby @[\w-]+ in https?://|^\s*[*-]\s*@[\w-]+ made their first contribution", re.I)
 BACKPORT_RE = re.compile(r"\b(back-?port(?:s|ed|ing)?|cherry[- ]?pick(?:s|ed)?)\b", re.I)
-ANY_REF_RE = re.compile(r"(?:(?<![\w/.-])#|/pull/)(\d+)(?!\d)")
+ANY_REF_RE = re.compile(r"(?<![\w/.#-])#(\d+)(?![\w])|(?<![\w.-])https?://(?:www\.)?github\.com/([\w.-]+/[\w.-]+)/pull/(\d+)(?![\w])", re.I)
 RELEASE_BRANCH_RE = re.compile(r"(\[(?:release|servicing|backport)[^\]]*\]|\b(?:release|servicing)/v?\d)", re.I)
 PORT_TITLE_RE = re.compile(r"\(#\d+\)\s*\(#\d+\)\s*$")  # "Title (#orig) (#port)": a cherry-pick / forward port
 MAX_REFS = 4  # an event citing more PR numbers than this is a changelog / release / batch, not a fix
@@ -35,15 +39,26 @@ NOISE_FILES = {
 
 
 def ref_regex(number: int, repo: str | None = None) -> re.Pattern:
-    """Matches #N, <this repo>#N, or a .../<this repo>/pull/N URL; never other repos' #N."""
-    parts = [r"(?<![\w/.-])#%d(?!\d)" % number]
+    """Matches #N, <this repo>#N, or a .../<this repo>/pull/N URL; never other repos' #N,
+    never C#12 / foo#12 / #12abc / .../pull/12 of another repo."""
+    parts = [r"(?<![\w/.#-])#%d(?![\w])" % number]
     if repo:
         o = re.escape(repo)
-        parts.append(r"(?<![\w/.-])%s#%d(?!\d)" % (o, number))
-        parts.append(r"github\.com/%s/pull/%d(?!\d)" % (o, number))
-    else:
-        parts.append(r"/pull/%d(?!\d)" % number)
+        parts.append(r"(?<![\w/.#-])%s#%d(?![\w])" % (o, number))
+        parts.append(r"(?<![\w.-])https?://(?:www\.)?github\.com/%s/pull/%d(?![\w])" % (o, number))
     return re.compile("|".join(parts), re.I)
+
+
+def any_ref_numbers(text: str, repo: str | None = None) -> set[str]:
+    """Distinct PR/issue numbers of THIS repo cited in the text (bare #N, or a URL of `repo`;
+    all URLs when repo is None), with the same strict boundaries as ref_regex."""
+    out = set()
+    for m in ANY_REF_RE.finditer(text or ""):
+        if m.group(1):
+            out.add(m.group(1))
+        elif repo is None or m.group(2).lower() == repo.lower():
+            out.add(m.group(3))
+    return out
 
 
 def _lines(text: str) -> list[str]:
@@ -85,11 +100,13 @@ def revert_hits(event: dict, pr: dict, repo: str | None = None) -> bool:
     if references(full, pr, repo):
         return True
     core = _title_core(pr["title"])
-    return len(core) >= 8 and ('"%s' % core).lower() in title.lower()
+    if len(core) < 8:
+        return False
+    return bool(re.search(r'"\s*%s\s*(?:\(#\d+\)\s*)?"' % re.escape(core), title, re.I))
 
 
 def named_fix_hits(event: dict, pr: dict, repo: str | None = None) -> bool:
-    """Event cites the PR and uses a fix-type keyword near the citation (same line, or in the title)."""
+    """Event cites the PR and uses a fix-type keyword on the same line as the citation (the title is a line)."""
     if is_revert_text(event["title"], event["body"]):
         return False  # reverts are reported by their own detector
     rx = ref_regex(pr["number"], repo)
@@ -97,14 +114,14 @@ def named_fix_hits(event: dict, pr: dict, repo: str | None = None) -> bool:
     full = title + "\n" + body
     if not rx.search(full):
         return False
-    if len(set(ANY_REF_RE.findall(full))) > MAX_REFS:
+    if len(any_ref_numbers(full, repo)) > MAX_REFS:
         return False  # release notes / batch PRs list many numbers beside "fix" lines
-    if PORT_TITLE_RE.search(title) or BACKPORT_RE.search(full) or RELEASE_BRANCH_RE.search(title):
+    if RELEASE_EVENT_RE.search(title):
+        return False  # release PRs list changes, they do not fix them
+    if PORT_TITLE_RE.search(title) or BACKPORT_RE.search(title) or RELEASE_BRANCH_RE.search(title):
         return False  # backports / release-branch ports copy a change, they do not repair it
-    if FIX_RE.search(title):
-        return True
     for ln in _lines(full):
-        if rx.search(ln) and FIX_RE.search(ln):
+        if rx.search(ln) and FIX_RE.search(ln) and not BACKPORT_RE.search(ln) and not CHANGELOG_LINE_RE.search(ln):
             return True
     return False
 

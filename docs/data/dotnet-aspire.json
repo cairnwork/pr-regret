@@ -33,42 +33,178 @@
       }
     },
     "other": {
-      "merged_mature": 311,
+      "merged_mature": 328,
       "named_fix": {
         "ci95": [
-          0.0446,
-          0.101
+          0.0065,
+          0.0352
         ],
-        "k": 21,
-        "n": 311,
-        "rate": 0.06752411575562701
+        "k": 5,
+        "n": 328,
+        "rate": 0.01524390243902439
       },
       "revert": {
         "ci95": [
-          0.0033,
-          0.028
+          0.0031,
+          0.0265
         ],
         "k": 3,
-        "n": 311,
-        "rate": 0.00964630225080386
+        "n": 328,
+        "rate": 0.009146341463414634
       },
       "revert_or_named_fix": {
         "ci95": [
-          0.0524,
-          0.1123
+          0.0124,
+          0.0474
         ],
-        "k": 24,
-        "n": 311,
-        "rate": 0.07717041800643087
+        "k": 8,
+        "n": 328,
+        "rate": 0.024390243902439025
       }
     }
   },
-  "cache_hits": 385,
-  "generated": "2026-10-23T12:45:42Z",
+  "cache_hits": 409,
+  "generated": "2026-10-23T13:04:08Z",
   "immature_excluded": 0,
-  "merged_prs": 316,
-  "note": "LOWER BOUND: only traces left in titles, bodies, commit messages and changed-file lists are visible. This is not the true rate of false completion. same_file_weak is a weak signal and is not included in revert_or_named_fix.",
+  "merged_prs": 333,
+  "note": "HEURISTIC TRACE RATE, not a bound and not the true rate of false completion: only traces left in titles, bodies, commit messages and changed-file lists are visible (silent fixes are missed) and some matches may not be real fixes. same_file_weak compares against every merged PR of any author and is not included in revert_or_named_fix.",
   "prs": [
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 15634,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 16275,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 16555,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 16842,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 17351,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 17562,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 17811,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18033,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": true,
+      "pr": 18063,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18068,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18339,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18443,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18554,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18555,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18562,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18597,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 18600,
+      "revert": false,
+      "same_file": true
+    },
     {
       "ai": false,
       "mature": true,
@@ -216,7 +352,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 18943,
       "revert": false,
       "same_file": true
@@ -232,7 +368,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 18952,
       "revert": false,
       "same_file": true
@@ -291,7 +427,7 @@
       "named_fix": false,
       "pr": 18974,
       "revert": false,
-      "same_file": false
+      "same_file": true
     },
     {
       "ai": false,
@@ -304,7 +440,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 18976,
       "revert": false,
       "same_file": true
@@ -384,7 +520,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 18989,
       "revert": false,
       "same_file": true
@@ -568,7 +704,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19055,
       "revert": false,
       "same_file": true
@@ -680,7 +816,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19084,
       "revert": false,
       "same_file": true
@@ -808,7 +944,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19142,
       "revert": false,
       "same_file": true
@@ -824,7 +960,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19146,
       "revert": false,
       "same_file": true
@@ -1040,7 +1176,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19214,
       "revert": false,
       "same_file": true
@@ -1208,7 +1344,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19247,
       "revert": false,
       "same_file": true
@@ -1243,7 +1379,7 @@
       "named_fix": false,
       "pr": 19254,
       "revert": false,
-      "same_file": false
+      "same_file": true
     },
     {
       "ai": false,
@@ -1344,7 +1480,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19291,
       "revert": false,
       "same_file": true
@@ -1448,7 +1584,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19313,
       "revert": false,
       "same_file": true
@@ -1608,7 +1744,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19348,
       "revert": false,
       "same_file": true
@@ -1912,7 +2048,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19446,
       "revert": false,
       "same_file": true
@@ -2032,7 +2168,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19509,
       "revert": false,
       "same_file": true
@@ -2376,7 +2512,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19636,
       "revert": false,
       "same_file": true
@@ -2552,7 +2688,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 19733,
       "revert": false,
       "same_file": true
@@ -2603,39 +2739,39 @@
   "summary": {
     "named_fix": {
       "ci95": [
-        0.0439,
-        0.0995
+        0.0064,
+        0.0347
       ],
-      "k": 21,
-      "n": 316,
-      "rate": 0.06645569620253164
+      "k": 5,
+      "n": 333,
+      "rate": 0.015015015015015015
     },
     "revert": {
       "ci95": [
-        0.0032,
-        0.0275
+        0.0031,
+        0.0261
       ],
       "k": 3,
-      "n": 316,
-      "rate": 0.00949367088607595
+      "n": 333,
+      "rate": 0.009009009009009009
     },
     "revert_or_named_fix": {
       "ci95": [
-        0.0516,
-        0.1105
+        0.0122,
+        0.0467
       ],
-      "k": 24,
-      "n": 316,
-      "rate": 0.0759493670886076
+      "k": 8,
+      "n": 333,
+      "rate": 0.024024024024024024
     },
     "same_file_weak": {
       "ci95": [
-        0.7396,
-        0.8294
+        0.746,
+        0.8329
       ],
-      "k": 249,
-      "n": 316,
-      "rate": 0.7879746835443038
+      "k": 264,
+      "n": 333,
+      "rate": 0.7927927927927928
     }
   },
   "until": "2026-08-31",

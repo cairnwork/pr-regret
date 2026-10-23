@@ -10,7 +10,7 @@ from .scan import scan
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(prog="pr-regret", description=__doc__ or "Lower bound of merged PRs fixed or reverted within 7 days.")
+    ap = argparse.ArgumentParser(prog="pr-regret", description=__doc__ or "Heuristic trace rate of merged PRs fixed or reverted within 7 days.")
     ap.add_argument("--version", action="version", version=__version__)
     sub = ap.add_subparsers(dest="cmd", required=True)
     sc = sub.add_parser("scan", help="scan merged PRs of OWNER/REPO")
@@ -22,8 +22,6 @@ def main(argv: list[str] | None = None) -> int:
     sc.add_argument("--format", choices=["text", "json", "markdown"], default="text")
     sc.add_argument("-o", "--output", help="write to FILE instead of stdout")
     sc.add_argument("--no-samefile", action="store_true", help="skip the per-PR files calls (no same-file signal)")
-    sc.add_argument("--lookback-days", type=int, default=30,
-                    help="also look at PRs created this many days before --since (default 30)")
     sc.add_argument("--cache-dir", help="response cache dir (default ~/.cache/pr-regret)")
     sc.add_argument("--no-cache", action="store_true")
     sc.add_argument("--refresh", action="store_true", help="ignore existing cache and refetch")
@@ -32,7 +30,7 @@ def main(argv: list[str] | None = None) -> int:
         ap.error("repo must be OWNER/REPO")
     try:
         cl = Client(a.repo, cache_dir=a.cache_dir, use_cache=not a.no_cache, refresh=a.refresh)
-        res = scan(cl, a.since, a.until, a.author_filter, not a.no_samefile, a.lookback_days)
+        res = scan(cl, a.since, a.until, a.author_filter, not a.no_samefile)
     except GitHubError as e:
         print("pr-regret: %s" % e, file=sys.stderr)
         return 2

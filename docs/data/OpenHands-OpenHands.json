@@ -33,42 +33,58 @@
       }
     },
     "other": {
-      "merged_mature": 50,
+      "merged_mature": 52,
       "named_fix": {
         "ci95": [
-          0.011,
-          0.1346
+          0.0034,
+          0.1012
         ],
-        "k": 2,
-        "n": 50,
-        "rate": 0.04
+        "k": 1,
+        "n": 52,
+        "rate": 0.019230769230769232
       },
       "revert": {
         "ci95": [
           0.0,
-          0.0713
+          0.0688
         ],
         "k": 0,
-        "n": 50,
+        "n": 52,
         "rate": 0.0
       },
       "revert_or_named_fix": {
         "ci95": [
-          0.011,
-          0.1346
+          0.0034,
+          0.1012
         ],
-        "k": 2,
-        "n": 50,
-        "rate": 0.04
+        "k": 1,
+        "n": 52,
+        "rate": 0.019230769230769232
       }
     }
   },
-  "cache_hits": 187,
-  "generated": "2026-10-23T12:46:03Z",
+  "cache_hits": 186,
+  "generated": "2026-10-23T13:04:35Z",
   "immature_excluded": 0,
-  "merged_prs": 110,
-  "note": "LOWER BOUND: only traces left in titles, bodies, commit messages and changed-file lists are visible. This is not the true rate of false completion. same_file_weak is a weak signal and is not included in revert_or_named_fix.",
+  "merged_prs": 112,
+  "note": "HEURISTIC TRACE RATE, not a bound and not the true rate of false completion: only traces left in titles, bodies, commit messages and changed-file lists are visible (silent fixes are missed) and some matches may not be real fixes. same_file_weak compares against every merged PR of any author and is not included in revert_or_named_fix.",
   "prs": [
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 16089,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 16178,
+      "revert": false,
+      "same_file": true
+    },
     {
       "ai": false,
       "mature": true,
@@ -160,7 +176,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 16982,
       "revert": false,
       "same_file": true
@@ -955,39 +971,39 @@
   "summary": {
     "named_fix": {
       "ci95": [
-        0.005,
-        0.0639
+        0.0016,
+        0.0488
       ],
-      "k": 2,
-      "n": 110,
-      "rate": 0.01818181818181818
+      "k": 1,
+      "n": 112,
+      "rate": 0.008928571428571428
     },
     "revert": {
       "ci95": [
         0.0,
-        0.0337
+        0.0332
       ],
       "k": 0,
-      "n": 110,
+      "n": 112,
       "rate": 0.0
     },
     "revert_or_named_fix": {
       "ci95": [
-        0.005,
-        0.0639
+        0.0016,
+        0.0488
       ],
-      "k": 2,
-      "n": 110,
-      "rate": 0.01818181818181818
+      "k": 1,
+      "n": 112,
+      "rate": 0.008928571428571428
     },
     "same_file_weak": {
       "ci95": [
-        0.3133,
-        0.4934
+        0.324,
+        0.5033
       ],
-      "k": 44,
-      "n": 110,
-      "rate": 0.4
+      "k": 46,
+      "n": 112,
+      "rate": 0.4107142857142857
     }
   },
   "until": "2026-09-15",

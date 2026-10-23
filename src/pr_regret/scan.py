@@ -47,14 +47,16 @@ def _norm_pr(raw: dict) -> dict:
             "head_ref": ((raw.get("head") or {}).get("ref")) or "", "ai": is_ai_pr(raw), "files": None}
 
 
-def fetch_prs(cl: Client, lo: datetime, hi: datetime, lookback_days: int) -> list[dict]:
-    """Closed PRs sorted by creation (newest first); stop once creation is older than lo - lookback."""
-    stop = lo - timedelta(days=lookback_days)
+def fetch_prs(cl: Client, lo: datetime, hi: datetime, fresh_after: float | None = None) -> list[dict]:
+    """Every PR merged in [lo, hi]. Closed PRs are listed by last update (newest first); a merged PR's
+    updated_at is never earlier than its merge time, so we can stop at the first PR updated before lo
+    without missing long-open PRs. Truncation raises instead of silently under-sampling."""
     out = []
-    for page in cl.pages("/repos/%s/pulls?state=closed&sort=created&direction=desc" % cl.repo):
+    for page in cl.pages("/repos/%s/pulls?state=closed&sort=updated&direction=desc" % cl.repo,
+                          fresh_after=fresh_after):
         done = False
         for raw in page:
-            if parse_ts(raw["created_at"]) < stop:
+            if parse_ts(raw["updated_at"]) < lo:
                 done = True
                 continue
             if raw.get("merged_at") and lo <= parse_ts(raw["merged_at"]) <= hi:
@@ -64,10 +66,11 @@ def fetch_prs(cl: Client, lo: datetime, hi: datetime, lookback_days: int) -> lis
     return out
 
 
-def fetch_commits(cl: Client, lo: datetime, hi: datetime) -> list[dict]:
+def fetch_commits(cl: Client, lo: datetime, hi: datetime, fresh_after: float | None = None) -> list[dict]:
     fmt = "%Y-%m-%dT%H:%M:%SZ"
     out = []
-    for page in cl.pages("/repos/%s/commits?since=%s&until=%s" % (cl.repo, lo.strftime(fmt), hi.strftime(fmt))):
+    for page in cl.pages("/repos/%s/commits?since=%s&until=%s" % (cl.repo, lo.strftime(fmt), hi.strftime(fmt)),
+                          fresh_after=fresh_after):
         for c in page:
             cm = c.get("commit") or {}
             date = (cm.get("committer") or {}).get("date") or (cm.get("author") or {}).get("date")
@@ -77,22 +80,34 @@ def fetch_commits(cl: Client, lo: datetime, hi: datetime) -> list[dict]:
 
 
 def fetch_files(cl: Client, number: int) -> set[str]:
+    """Changed files, first 300 only (3 pages); larger PRs are compared on their first 300 files."""
     files = set()
-    for page in cl.pages("/repos/%s/pulls/%d/files" % (cl.repo, number), max_pages=3):
+    for page in cl.pages("/repos/%s/pulls/%d/files" % (cl.repo, number), max_pages=3, strict=False):
         files.update(f["filename"] for f in page)
     return files
 
 
 def scan(cl: Client, since: str, until: str, author_filter: str = "all", samefile: bool = True,
-         lookback_days: int = 30, now: datetime | None = None) -> dict:
-    now = now or datetime.now(timezone.utc)
+         now: datetime | None = None) -> dict:
+    now = now or datetime.fromtimestamp(cl.clock(), timezone.utc)
     lo, hi_targets = parse_date(since), parse_date(until, end=True)
     hi_ext = min(hi_targets + detect.WINDOW, now)
-    prs = fetch_prs(cl, lo, hi_ext, lookback_days)
-    commits = fetch_commits(cl, lo, hi_ext)
+    # Listings are only trusted from cache if they were fetched after the 7-day window closed.
+    fresh = (hi_targets + detect.WINDOW).timestamp()
+    prs = fetch_prs(cl, lo, hi_ext, fresh)
+    commits = fetch_commits(cl, lo, hi_ext, fresh)
+    targets = [p for p in prs if p["merged_at"] <= hi_targets and (author_filter != "bot" or p["ai"])
+               and p["merged_at"] + detect.WINDOW <= now]
     if samefile:
+        # Comparison population = every merged PR (any author). Fetch files only where needed:
+        # the targets and PRs merged within 7 days after some target.
+        need = {p["number"] for p in targets}
+        for q in prs:
+            if any(t["merged_at"] < q["merged_at"] <= t["merged_at"] + detect.WINDOW for t in targets):
+                need.add(q["number"])
         for p in prs:
-            p["files"] = fetch_files(cl, p["number"])
+            if p["number"] in need:
+                p["files"] = fetch_files(cl, p["number"])
     cl.save()
     ev = detect._events(prs, commits)
     rows = []
@@ -130,8 +145,9 @@ def scan(cl: Client, since: str, until: str, author_filter: str = "all", samefil
         },
         "by_author_class": {"agent_authored": strata(True), "other": strata(False)},
         "prs": rows,
-        "note": ("LOWER BOUND: only traces left in titles, bodies, commit messages and changed-file lists "
-                 "are visible. This is not the true rate of false completion. same_file_weak is a weak "
-                 "signal and is not included in revert_or_named_fix."),
+        "note": ("HEURISTIC TRACE RATE, not a bound and not the true rate of false completion: only traces "
+                 "left in titles, bodies, commit messages and changed-file lists are visible (silent fixes "
+                 "are missed) and some matches may not be real fixes. same_file_weak compares against every "
+                 "merged PR of any author and is not included in revert_or_named_fix."),
         "api_calls": cl.calls, "cache_hits": cl.hits,
     }

@@ -1,144 +1,4 @@
 {
- "/repos/o/r/pulls?state=closed&sort=created&direction=desc&per_page=100&page=1": [
-  {
-   "number": 7,
-   "title": "Newest change",
-   "body": "",
-   "user": {
-    "login": "human"
-   },
-   "head": {
-    "ref": "feat/x"
-   },
-   "merged_at": "2026-03-19T10:00:00Z",
-   "created_at": "2026-03-19T10:00:00Z",
-   "merge_commit_sha": "0000007000000700000070000007000000700000"
-  },
-  {
-   "number": 6,
-   "title": "Late fix for #3",
-   "body": "",
-   "user": {
-    "login": "human"
-   },
-   "head": {
-    "ref": "feat/x"
-   },
-   "merged_at": "2026-03-12T10:00:00Z",
-   "created_at": "2026-03-12T10:00:00Z",
-   "merge_commit_sha": "0000006000000600000060000006000000600000"
-  },
-  {
-   "number": 5,
-   "title": "Docs",
-   "body": "mentions #3 for context",
-   "user": {
-    "login": "human"
-   },
-   "head": {
-    "ref": "feat/x"
-   },
-   "merged_at": "2026-03-04T10:00:00Z",
-   "created_at": "2026-03-04T10:00:00Z",
-   "merge_commit_sha": "0000005000000500000050000005000000500000"
-  },
-  {
-   "number": 4,
-   "title": "Fix crash in parser (follow-up to #3)",
-   "body": "",
-   "user": {
-    "login": "copilot-swe-agent[bot]"
-   },
-   "head": {
-    "ref": "feat/x"
-   },
-   "merged_at": "2026-03-05T10:00:00Z",
-   "created_at": "2026-03-05T10:00:00Z",
-   "merge_commit_sha": "0000004000000400000040000004000000400000"
-  },
-  {
-   "number": 3,
-   "title": "Add parser",
-   "body": "Fix typos (#3)",
-   "user": {
-    "login": "human"
-   },
-   "head": {
-    "ref": "feat/x"
-   },
-   "merged_at": "2026-03-02T10:00:00Z",
-   "created_at": "2026-03-02T10:00:00Z",
-   "merge_commit_sha": "0000003000000300000030000003000000300000"
-  },
-  {
-   "number": 2,
-   "title": "Revert \"Add widget\"",
-   "body": "Reverts o/r#1",
-   "user": {
-    "login": "human"
-   },
-   "head": {
-    "ref": "feat/x"
-   },
-   "merged_at": "2026-03-03T10:00:00Z",
-   "created_at": "2026-03-03T10:00:00Z",
-   "merge_commit_sha": "0000002000000200000020000002000000200000"
-  },
-  {
-   "number": 1,
-   "title": "Add widget",
-   "body": "",
-   "user": {
-    "login": "human"
-   },
-   "head": {
-    "ref": "copilot/add-widget"
-   },
-   "merged_at": "2026-03-01T10:00:00Z",
-   "created_at": "2026-03-01T10:00:00Z",
-   "merge_commit_sha": "0000001000000100000010000001000000100000"
-  },
-  {
-   "number": 99,
-   "title": "Bump foo",
-   "body": "",
-   "user": {
-    "login": "dependabot[bot]"
-   },
-   "head": {
-    "ref": "dependabot/pip/foo"
-   },
-   "merged_at": "2026-03-04T10:00:00Z",
-   "created_at": "2026-03-04T10:00:00Z",
-   "merge_commit_sha": "0000099000009900000990000099000009900000"
-  },
-  {
-   "number": 50,
-   "title": "never merged",
-   "body": "",
-   "user": {
-    "login": "x"
-   },
-   "head": {
-    "ref": "z"
-   },
-   "merged_at": null,
-   "created_at": "2026-03-01T00:00:00Z"
-  },
-  {
-   "number": 10,
-   "title": "ancient",
-   "body": "",
-   "user": {
-    "login": "x"
-   },
-   "head": {
-    "ref": "z"
-   },
-   "merged_at": "2026-01-01T00:00:00Z",
-   "created_at": "2025-12-01T00:00:00Z"
-  }
- ],
  "/repos/o/r/commits?since=2026-03-01T00:00:00Z&until=2026-03-20T00:00:00Z&per_page=100&page=1": [
   {
    "sha": "cccccccccccccccccccccccccccccccccccccccc",
@@ -206,6 +66,176 @@
  "/repos/o/r/pulls/99/files?per_page=100&page=1": [
   {
    "filename": "uv.lock"
+  }
+ ],
+ "/repos/o/r/pulls?state=closed&sort=updated&direction=desc&per_page=100&page=1": [
+  {
+   "number": 7,
+   "title": "Newest change",
+   "body": "",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-19T10:00:00Z",
+   "created_at": "2026-03-19T10:00:00Z",
+   "merge_commit_sha": "0000007000000700000070000007000000700000",
+   "updated_at": "2026-03-19T10:00:00Z"
+  },
+  {
+   "number": 6,
+   "title": "Late fix for #3",
+   "body": "",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-12T10:00:00Z",
+   "created_at": "2026-03-12T10:00:00Z",
+   "merge_commit_sha": "0000006000000600000060000006000000600000",
+   "updated_at": "2026-03-12T10:00:00Z"
+  },
+  {
+   "number": 5,
+   "title": "Docs",
+   "body": "mentions #3 for context",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-04T10:00:00Z",
+   "created_at": "2026-03-04T10:00:00Z",
+   "merge_commit_sha": "0000005000000500000050000005000000500000",
+   "updated_at": "2026-03-04T10:00:00Z"
+  },
+  {
+   "number": 4,
+   "title": "Fix crash in parser (follow-up to #3)",
+   "body": "",
+   "user": {
+    "login": "copilot-swe-agent[bot]"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-05T10:00:00Z",
+   "created_at": "2026-03-05T10:00:00Z",
+   "merge_commit_sha": "0000004000000400000040000004000000400000",
+   "updated_at": "2026-03-05T10:00:00Z"
+  },
+  {
+   "number": 3,
+   "title": "Add parser",
+   "body": "Fix typos (#3)",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-02T10:00:00Z",
+   "created_at": "2026-03-02T10:00:00Z",
+   "merge_commit_sha": "0000003000000300000030000003000000300000",
+   "updated_at": "2026-03-02T10:00:00Z"
+  },
+  {
+   "number": 2,
+   "title": "Revert \"Add widget\"",
+   "body": "Reverts o/r#1",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "feat/x"
+   },
+   "merged_at": "2026-03-03T10:00:00Z",
+   "created_at": "2026-03-03T10:00:00Z",
+   "merge_commit_sha": "0000002000000200000020000002000000200000",
+   "updated_at": "2026-03-03T10:00:00Z"
+  },
+  {
+   "number": 1,
+   "title": "Add widget",
+   "body": "",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "copilot/add-widget"
+   },
+   "merged_at": "2026-03-01T10:00:00Z",
+   "created_at": "2026-03-01T10:00:00Z",
+   "merge_commit_sha": "0000001000000100000010000001000000100000",
+   "updated_at": "2026-03-01T10:00:00Z"
+  },
+  {
+   "number": 99,
+   "title": "Bump foo",
+   "body": "",
+   "user": {
+    "login": "dependabot[bot]"
+   },
+   "head": {
+    "ref": "dependabot/pip/foo"
+   },
+   "merged_at": "2026-03-04T10:00:00Z",
+   "created_at": "2026-03-04T10:00:00Z",
+   "merge_commit_sha": "0000099000009900000990000099000009900000",
+   "updated_at": "2026-03-04T10:00:00Z"
+  },
+  {
+   "number": 50,
+   "title": "never merged",
+   "body": "",
+   "user": {
+    "login": "x"
+   },
+   "head": {
+    "ref": "z"
+   },
+   "merged_at": null,
+   "created_at": "2026-03-01T00:00:00Z",
+   "updated_at": "2026-03-01T00:00:00Z"
+  },
+  {
+   "number": 10,
+   "title": "ancient",
+   "body": "",
+   "user": {
+    "login": "x"
+   },
+   "head": {
+    "ref": "z"
+   },
+   "merged_at": "2026-01-01T00:00:00Z",
+   "created_at": "2025-12-01T00:00:00Z",
+   "updated_at": "2026-01-01T00:00:00Z"
+  },
+  {
+   "number": 60,
+   "title": "Long open change",
+   "body": "",
+   "user": {
+    "login": "human"
+   },
+   "head": {
+    "ref": "old"
+   },
+   "merged_at": "2026-03-06T10:00:00Z",
+   "created_at": "2025-12-01T00:00:00Z",
+   "updated_at": "2026-03-06T10:00:00Z",
+   "merge_commit_sha": "6666666666666666666666666666666666666666"
+  }
+ ],
+ "/repos/o/r/pulls/60/files?per_page=100&page=1": [
+  {
+   "filename": "long.py"
   }
  ]
 }

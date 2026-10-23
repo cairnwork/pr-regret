@@ -3,72 +3,176 @@
   "author_filter": "all",
   "by_author_class": {
     "agent_authored": {
-      "merged_mature": 13,
+      "merged_mature": 16,
       "named_fix": {
         "ci95": [
           0.0,
-          0.2281
+          0.1936
         ],
         "k": 0,
-        "n": 13,
+        "n": 16,
         "rate": 0.0
       },
       "revert": {
         "ci95": [
           0.0,
-          0.2281
+          0.1936
         ],
         "k": 0,
-        "n": 13,
+        "n": 16,
         "rate": 0.0
       },
       "revert_or_named_fix": {
         "ci95": [
           0.0,
-          0.2281
+          0.1936
         ],
         "k": 0,
-        "n": 13,
+        "n": 16,
         "rate": 0.0
       }
     },
     "other": {
-      "merged_mature": 282,
+      "merged_mature": 292,
       "named_fix": {
         "ci95": [
-          0.0055,
-          0.0359
+          0.0035,
+          0.0298
         ],
-        "k": 4,
-        "n": 282,
-        "rate": 0.014184397163120567
+        "k": 3,
+        "n": 292,
+        "rate": 0.010273972602739725
       },
       "revert": {
         "ci95": [
           0.0,
-          0.0134
+          0.013
         ],
         "k": 0,
-        "n": 282,
+        "n": 292,
         "rate": 0.0
       },
       "revert_or_named_fix": {
         "ci95": [
-          0.0055,
-          0.0359
+          0.0035,
+          0.0298
         ],
-        "k": 4,
-        "n": 282,
-        "rate": 0.014184397163120567
+        "k": 3,
+        "n": 292,
+        "rate": 0.010273972602739725
       }
     }
   },
-  "cache_hits": 400,
-  "generated": "2026-10-23T12:45:55Z",
+  "cache_hits": 421,
+  "generated": "2026-10-23T13:04:26Z",
   "immature_excluded": 0,
-  "merged_prs": 295,
-  "note": "LOWER BOUND: only traces left in titles, bodies, commit messages and changed-file lists are visible. This is not the true rate of false completion. same_file_weak is a weak signal and is not included in revert_or_named_fix.",
+  "merged_prs": 308,
+  "note": "HEURISTIC TRACE RATE, not a bound and not the true rate of false completion: only traces left in titles, bodies, commit messages and changed-file lists are visible (silent fixes are missed) and some matches may not be real fixes. same_file_weak compares against every merged PR of any author and is not included in revert_or_named_fix.",
   "prs": [
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 55897,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 63813,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 64174,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 64278,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 64859,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 65483,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 65733,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 66569,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 66642,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67083,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67310,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67395,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67539,
+      "revert": false,
+      "same_file": true
+    },
     {
       "ai": false,
       "mature": true,
@@ -155,7 +259,7 @@
       "named_fix": false,
       "pr": 67988,
       "revert": false,
-      "same_file": false
+      "same_file": true
     },
     {
       "ai": false,
@@ -864,7 +968,7 @@
     {
       "ai": false,
       "mature": true,
-      "named_fix": true,
+      "named_fix": false,
       "pr": 68307,
       "revert": false,
       "same_file": true
@@ -2435,39 +2539,39 @@
   "summary": {
     "named_fix": {
       "ci95": [
-        0.0053,
-        0.0343
+        0.0033,
+        0.0282
       ],
-      "k": 4,
-      "n": 295,
-      "rate": 0.013559322033898305
+      "k": 3,
+      "n": 308,
+      "rate": 0.00974025974025974
     },
     "revert": {
       "ci95": [
         0.0,
-        0.0129
+        0.0123
       ],
       "k": 0,
-      "n": 295,
+      "n": 308,
       "rate": 0.0
     },
     "revert_or_named_fix": {
       "ci95": [
-        0.0053,
-        0.0343
+        0.0033,
+        0.0282
       ],
-      "k": 4,
-      "n": 295,
-      "rate": 0.013559322033898305
+      "k": 3,
+      "n": 308,
+      "rate": 0.00974025974025974
     },
     "same_file_weak": {
       "ci95": [
-        0.6227,
-        0.7287
+        0.6111,
+        0.7159
       ],
-      "k": 200,
-      "n": 295,
-      "rate": 0.6779661016949152
+      "k": 205,
+      "n": 308,
+      "rate": 0.6655844155844156
     }
   },
   "until": "2026-08-31",
