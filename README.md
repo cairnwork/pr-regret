@@ -48,6 +48,7 @@ The headline number is **revert or named fix**. The same-file signal is reported
 In a venv: `pip install -e .[dev]` then `pytest`.
 
 ## Limits
+- Self-reference is recognised only through a PR's merge commit SHA. Repositories that merge by rebase have no merge SHA, so a PR's own commits landing just after its merge time can be counted as if they were a later fix (a small over-count).
 
 See `docs/VALIDATION.md` for runs on public repos and what they do and do not show. Short list: heuristic trace rate (misses and false positives both possible); agent-authored detection is a heuristic; one repo and one window per run; PRs are listed by last update (a PR updated while a run is paging can shift pages by one, so a very busy repo may skip or repeat a PR; re-run with `--refresh` to check), and a run fails loudly instead of truncating when a listing exceeds 10,000 items; cached listings fetched before the 7-day window closed are refetched automatically; `--since/--until` are UTC days. Pass a `GITHUB_TOKEN`: unauthenticated runs hit the 60 requests/hour limit quickly.
 
