@@ -18,6 +18,11 @@ FIX_RE = re.compile(
     r"follow(?:s|ed)? up|broke|broken|breaks|oops)\b",
     re.I,
 )
+BACKPORT_RE = re.compile(r"\b(back-?port(?:s|ed|ing)?|cherry[- ]?pick(?:s|ed)?)\b", re.I)
+ANY_REF_RE = re.compile(r"(?:(?<![\w/.-])#|/pull/)(\d+)(?!\d)")
+RELEASE_BRANCH_RE = re.compile(r"(\[(?:release|servicing|backport)[^\]]*\]|\b(?:release|servicing)/v?\d)", re.I)
+PORT_TITLE_RE = re.compile(r"\(#\d+\)\s*\(#\d+\)\s*$")  # "Title (#orig) (#port)": a cherry-pick / forward port
+MAX_REFS = 4  # an event citing more PR numbers than this is a changelog / release / batch, not a fix
 REVERT_RE = re.compile(r"\brevert(?:s|ed|ing)?\b", re.I)
 REVERTS_COMMIT_RE = re.compile(r"this reverts commit\s+([0-9a-f]{7,40})", re.I)
 SELF_NUM_RE = re.compile(r"\(#(\d+)\)\s*$")
@@ -92,6 +97,10 @@ def named_fix_hits(event: dict, pr: dict, repo: str | None = None) -> bool:
     full = title + "\n" + body
     if not rx.search(full):
         return False
+    if len(set(ANY_REF_RE.findall(full))) > MAX_REFS:
+        return False  # release notes / batch PRs list many numbers beside "fix" lines
+    if PORT_TITLE_RE.search(title) or BACKPORT_RE.search(full) or RELEASE_BRANCH_RE.search(title):
+        return False  # backports / release-branch ports copy a change, they do not repair it
     if FIX_RE.search(title):
         return True
     for ln in _lines(full):

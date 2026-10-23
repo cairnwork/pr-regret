@@ -8,7 +8,7 @@ from . import detect
 from .github import Client
 from .stats import summarize
 
-NOT_AI_BOTS = re.compile(r"(dependabot|renovate|github-actions|pre-commit-ci|greenkeeper|snyk|"
+NOT_AI_BOTS = re.compile(r"(release-bot|release-please|dependabot|renovate|github-actions|pre-commit-ci|greenkeeper|snyk|"
                          r"mergify|allcontributors|imgbot|weblate|transifex|crowdin)", re.I)
 AI_LOGIN = re.compile(r"(copilot|devin|codex|claude|cursor|jules|openhands|sweep-ai|"
                       r"gemini-code|amazon-q|codegen|factory-droid|aider)", re.I)
@@ -111,6 +111,13 @@ def scan(cl: Client, since: str, until: str, author_filter: str = "all", samefil
     k_fix = sum(1 for r in m if r["named_fix"])
     k_any = sum(1 for r in m if r["revert"] or r["named_fix"])
     sf = [r for r in m if r["same_file"] is not None]
+
+    def strata(flag):
+        g = [r for r in m if r["ai"] is flag]
+        return {"merged_mature": len(g),
+                "revert": summarize(sum(1 for r in g if r["revert"]), len(g)),
+                "named_fix": summarize(sum(1 for r in g if r["named_fix"]), len(g)),
+                "revert_or_named_fix": summarize(sum(1 for r in g if r["revert"] or r["named_fix"]), len(g))}
     return {
         "repo": cl.repo, "since": since, "until": until, "author_filter": author_filter,
         "window_days": 7, "generated": now.strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -121,6 +128,7 @@ def scan(cl: Client, since: str, until: str, author_filter: str = "all", samefil
             "revert_or_named_fix": summarize(k_any, len(m)),
             "same_file_weak": summarize(sum(1 for r in sf if r["same_file"]), len(sf)),
         },
+        "by_author_class": {"agent_authored": strata(True), "other": strata(False)},
         "prs": rows,
         "note": ("LOWER BOUND: only traces left in titles, bodies, commit messages and changed-file lists "
                  "are visible. This is not the true rate of false completion. same_file_weak is a weak "

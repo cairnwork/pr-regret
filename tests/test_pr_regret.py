@@ -131,3 +131,15 @@ def test_disk_cache_roundtrip(tmp_path):
         scan(cl, "2026-03-01", "2026-03-20", now=NOW)
     first = len(calls)
     assert first > 0 and len(calls) == first   # second run served entirely from cache
+
+
+def test_changelog_and_backport_events_are_not_fixes():
+    pr = {"number": 3, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "z" * 40,
+          "title": "t", "body": ""}
+    notes = "chore: release 1.2\n\n* fix: a (#3)\n* fix: b (#11)\n* feat: c (#12)\n* fix: d (#13)\n* fix: e (#14)"
+    t, b = notes.split("\n\n")
+    assert not detect.named_fix_hits({"title": t, "body": b}, pr, "o/r")
+    assert not detect.named_fix_hits({"title": "[release/1.0] Fix thing (backport of #3)", "body": ""}, pr, "o/r")
+    assert detect.named_fix_hits({"title": "Fix thing", "body": "regression from #3"}, pr, "o/r")
+
+    assert not detect.named_fix_hits({"title": "Fix crash on start (#3) (#40)", "body": ""}, pr, "o/r")

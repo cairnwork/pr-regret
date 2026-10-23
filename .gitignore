@@ -3,3 +3,5 @@ __pycache__/
 .venv/
 build/
 .pytest_cache/
+docs/data/*.err
+docs/data/finished.txt

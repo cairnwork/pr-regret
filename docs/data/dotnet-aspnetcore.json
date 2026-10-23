@@ -1,0 +1,2475 @@
+{
+  "api_calls": 0,
+  "author_filter": "all",
+  "by_author_class": {
+    "agent_authored": {
+      "merged_mature": 13,
+      "named_fix": {
+        "ci95": [
+          0.0,
+          0.2281
+        ],
+        "k": 0,
+        "n": 13,
+        "rate": 0.0
+      },
+      "revert": {
+        "ci95": [
+          0.0,
+          0.2281
+        ],
+        "k": 0,
+        "n": 13,
+        "rate": 0.0
+      },
+      "revert_or_named_fix": {
+        "ci95": [
+          0.0,
+          0.2281
+        ],
+        "k": 0,
+        "n": 13,
+        "rate": 0.0
+      }
+    },
+    "other": {
+      "merged_mature": 282,
+      "named_fix": {
+        "ci95": [
+          0.0055,
+          0.0359
+        ],
+        "k": 4,
+        "n": 282,
+        "rate": 0.014184397163120567
+      },
+      "revert": {
+        "ci95": [
+          0.0,
+          0.0134
+        ],
+        "k": 0,
+        "n": 282,
+        "rate": 0.0
+      },
+      "revert_or_named_fix": {
+        "ci95": [
+          0.0055,
+          0.0359
+        ],
+        "k": 4,
+        "n": 282,
+        "rate": 0.014184397163120567
+      }
+    }
+  },
+  "cache_hits": 400,
+  "generated": "2026-10-23T12:45:55Z",
+  "immature_excluded": 0,
+  "merged_prs": 295,
+  "note": "LOWER BOUND: only traces left in titles, bodies, commit messages and changed-file lists are visible. This is not the true rate of false completion. same_file_weak is a weak signal and is not included in revert_or_named_fix.",
+  "prs": [
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67663,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67801,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67897,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67912,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67936,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67952,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67954,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67955,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67972,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67977,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67988,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 67993,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68001,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68007,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68014,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68015,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68032,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68064,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68066,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68082,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68085,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68088,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68091,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68092,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68095,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68096,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68102,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68111,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68114,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68119,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68120,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68124,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68125,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68126,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68127,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68129,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68135,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68142,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68144,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68145,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68151,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68152,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68164,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68168,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68171,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68172,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68173,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68174,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68175,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68176,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68177,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68186,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68187,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68188,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68189,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68190,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68200,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68202,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68207,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68208,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68210,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68211,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68212,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68213,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68214,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68218,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68221,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68224,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68226,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68230,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68231,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68232,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68233,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68234,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68235,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68236,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68238,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68242,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68243,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68245,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68246,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68250,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68253,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68254,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68255,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68256,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68259,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68260,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68261,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68265,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68266,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68269,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68272,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68277,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68279,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68280,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68285,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68289,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68306,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": true,
+      "pr": 68307,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68308,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68309,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68312,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68317,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68320,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68321,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68323,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68324,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68325,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68327,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68329,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68330,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68333,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68334,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68338,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68341,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68344,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68345,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68347,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68351,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68353,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68356,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68357,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68358,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68359,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68360,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68361,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68362,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68368,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68451,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68454,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68457,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68459,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68460,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68461,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68462,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": true,
+      "pr": 68463,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68464,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68465,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68466,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68468,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68472,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68477,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68478,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68489,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68491,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68492,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68493,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68496,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68499,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68500,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68502,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68503,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68510,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68514,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": true,
+      "pr": 68517,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68521,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68522,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68523,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68524,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68525,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68531,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68540,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68553,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68554,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68558,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68560,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68561,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68571,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68572,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68575,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68576,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68577,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68578,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68585,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68586,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68589,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68590,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68591,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68592,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68593,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68594,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68596,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68597,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68598,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68600,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68601,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68612,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68613,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68616,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68618,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68621,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68624,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68626,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68628,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68629,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68630,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68631,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68632,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68634,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68635,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68638,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68640,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68643,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68645,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68649,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68650,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68654,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68655,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68658,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68660,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68663,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68664,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68665,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68667,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68668,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68669,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68670,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68676,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68681,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68682,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68683,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68684,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68685,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68686,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68688,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68689,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68690,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68695,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68696,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68700,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68701,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68702,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68706,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68725,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68727,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68729,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68731,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68733,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68736,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68737,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": true,
+      "pr": 68744,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68746,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68747,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68749,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68750,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68751,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68752,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68757,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68758,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68759,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68760,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68766,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68771,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68773,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68774,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68776,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68778,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68782,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68783,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68784,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68785,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68791,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68792,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68794,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68795,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68799,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68800,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68803,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68804,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68806,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68824,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68825,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68826,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68827,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68829,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68830,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68835,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": true,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68841,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68845,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68851,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68853,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68857,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68862,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68864,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68866,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68874,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68875,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68877,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68878,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68880,
+      "revert": false,
+      "same_file": false
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68882,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68920,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68921,
+      "revert": false,
+      "same_file": true
+    },
+    {
+      "ai": false,
+      "mature": true,
+      "named_fix": false,
+      "pr": 68923,
+      "revert": false,
+      "same_file": true
+    }
+  ],
+  "repo": "dotnet/aspnetcore",
+  "since": "2026-08-01",
+  "summary": {
+    "named_fix": {
+      "ci95": [
+        0.0053,
+        0.0343
+      ],
+      "k": 4,
+      "n": 295,
+      "rate": 0.013559322033898305
+    },
+    "revert": {
+      "ci95": [
+        0.0,
+        0.0129
+      ],
+      "k": 0,
+      "n": 295,
+      "rate": 0.0
+    },
+    "revert_or_named_fix": {
+      "ci95": [
+        0.0053,
+        0.0343
+      ],
+      "k": 4,
+      "n": 295,
+      "rate": 0.013559322033898305
+    },
+    "same_file_weak": {
+      "ci95": [
+        0.6227,
+        0.7287
+      ],
+      "k": 200,
+      "n": 295,
+      "rate": 0.6779661016949152
+    }
+  },
+  "until": "2026-08-31",
+  "window_days": 7
+}
