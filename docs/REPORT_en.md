@@ -10,7 +10,7 @@ The three sets of numbers below use **different definitions and must not be comp
 | B. Public tool | merged PRs of 3 open-source repos | zero-model, deterministic "trace rate" | 0.9%-2.4% |
 | C. External study | agentic PRs in an MSR 2026 study | contains a reverting commit | 2.66% |
 
-## A. Internal audit (human re-checked, may be called a confirmed lower bound)
+## A. Internal audit (positives re-checked by a second model, not by humans; a confirmed lower bound under that definition)
 
 PRs merged 2026-08-01 to 10-16; question: within 7 days of merge, did a later PR name it as something it fixes?
 
@@ -42,7 +42,7 @@ The MSR 2026 Mining Challenge paper "When AI Code Doesn't Stick: An Empirical St
 
 ## How to read this
 
-1. A is a human-re-checked lower bound, B a heuristic signal, C another definition; they do not validate one another.
+1. A is a lower bound whose positives were re-checked by a second model (not human-verified), B a heuristic signal, C another definition; they do not validate one another.
 2. Why only real use and review catch them: merge gates check conditions at merge time, while this class of defect usually shows up when someone uses the change or reads the code (in A, 54 cases by use, 27 by review, core gate 0). Evidence for adding more pre-merge gates against this failure class is limited; the better-supported direction is to make "done" wait for a witness from real use.
 3. Other limits: B covers 3 repos and 1-2 months; the AI-authored flag is a heuristic (author login, branch prefix, body marker); public repos differ from our setup.
 
