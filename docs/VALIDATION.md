@@ -10,6 +10,8 @@ Run date: 2026-10-23, tool version 0.1.0 (final rules). All reads were GitHub GE
 
 Agent-authored subset (`--author-filter bot` heuristic): 5 + 16 + 60 = 81 PRs, **0 hits** (Wilson 95% upper bound 4.5%). Too few per repo to compare with other authors.
 
+Counts above were re-generated after the Codex review fixes (self-reference by merge SHA only, full `owner/repo#N` references, no-data intervals) and did not change.
+
 ## Precision measurement (the rules were tuned, then re-measured on another window)
 
 1. **Tuning sample (2026-07; aspire, aspnetcore, OpenHands; 24 hits under the first rule set).** An independent labeller (a separate model run that saw only the target title and the matched lines) judged 6 TRUE, 16 FALSE, 2 UNCLEAR (precision 25%). Dominant false hits: release-PR changelogs listing conventional-commit "fix" lines, "follow-up to #N" feature extensions, ports/backports. We then removed "follow-up" as a keyword and skipped release PRs and changelog lines. All 6 TRUE hits survive; 12 of the 24 hits remain.

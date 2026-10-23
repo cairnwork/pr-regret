@@ -8,6 +8,8 @@ def _pct(x: float) -> str:
 
 
 def _row(label: str, s: dict) -> tuple:
+    if s.get("no_data") or s.get("rate") is None:
+        return (label, "0/0", "no data", "no data")
     return (label, "%d/%d" % (s["k"], s["n"]), _pct(s["rate"]), "%s - %s" % (_pct(s["ci95"][0]), _pct(s["ci95"][1])))
 
 

@@ -17,5 +17,8 @@ def wilson(k: int, n: int, z: float = 1.959964) -> tuple[float, float]:
 
 
 def summarize(k: int, n: int) -> dict:
+    """Rate and Wilson interval; with no denominator there is no data (rate/ci95 are None, not 0%)."""
+    if n <= 0:
+        return {"k": k, "n": 0, "rate": None, "ci95": None, "no_data": True}
     lo, hi = wilson(k, n)
-    return {"k": k, "n": n, "rate": (k / n if n else 0.0), "ci95": [round(lo, 4), round(hi, 4)]}
+    return {"k": k, "n": n, "rate": k / n, "ci95": [round(lo, 4), round(hi, 4)], "no_data": False}

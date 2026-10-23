@@ -11,6 +11,7 @@
         ],
         "k": 0,
         "n": 60,
+        "no_data": false,
         "rate": 0.0
       },
       "revert": {
@@ -20,6 +21,7 @@
         ],
         "k": 0,
         "n": 60,
+        "no_data": false,
         "rate": 0.0
       },
       "revert_or_named_fix": {
@@ -29,6 +31,7 @@
         ],
         "k": 0,
         "n": 60,
+        "no_data": false,
         "rate": 0.0
       }
     },
@@ -41,6 +44,7 @@
         ],
         "k": 1,
         "n": 52,
+        "no_data": false,
         "rate": 0.019230769230769232
       },
       "revert": {
@@ -50,6 +54,7 @@
         ],
         "k": 0,
         "n": 52,
+        "no_data": false,
         "rate": 0.0
       },
       "revert_or_named_fix": {
@@ -59,12 +64,13 @@
         ],
         "k": 1,
         "n": 52,
+        "no_data": false,
         "rate": 0.019230769230769232
       }
     }
   },
   "cache_hits": 186,
-  "generated": "2026-10-23T13:04:35Z",
+  "generated": "2026-10-23T14:55:17Z",
   "immature_excluded": 0,
   "merged_prs": 112,
   "note": "HEURISTIC TRACE RATE, not a bound and not the true rate of false completion: only traces left in titles, bodies, commit messages and changed-file lists are visible (silent fixes are missed) and some matches may not be real fixes. same_file_weak compares against every merged PR of any author and is not included in revert_or_named_fix.",
@@ -976,6 +982,7 @@
       ],
       "k": 1,
       "n": 112,
+      "no_data": false,
       "rate": 0.008928571428571428
     },
     "revert": {
@@ -985,6 +992,7 @@
       ],
       "k": 0,
       "n": 112,
+      "no_data": false,
       "rate": 0.0
     },
     "revert_or_named_fix": {
@@ -994,6 +1002,7 @@
       ],
       "k": 1,
       "n": 112,
+      "no_data": false,
       "rate": 0.008928571428571428
     },
     "same_file_weak": {
@@ -1003,6 +1012,7 @@
       ],
       "k": 46,
       "n": 112,
+      "no_data": false,
       "rate": 0.4107142857142857
     }
   },

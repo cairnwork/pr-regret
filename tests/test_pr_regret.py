@@ -279,3 +279,34 @@ def test_precision_rules_from_hand_labelling():
     # changelog-style line inside an ordinary PR is skipped as well
     assert not detect.named_fix_hits({"title": "Docs", "body": "* fix: y by @b in https://github.com/o/r/pull/3"}, pr, "o/r")
     assert detect.named_fix_hits({"title": "Fix the crash caused by #3", "body": ""}, pr, "o/r")
+
+
+def test_later_commit_with_trailing_pr_number_is_not_mistaken_for_self():
+    """A later plain commit titled 'Fix regression (#3)' cites PR 3; only a PR's own merge commit is 'self'."""
+    pr3 = {"number": 3, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "a" * 40,
+           "title": "Add parser", "body": "", "files": None}
+    later = {"sha": "b" * 40, "date": datetime(2026, 3, 4, tzinfo=timezone.utc), "message": "Fix regression (#3)"}
+    own = {"sha": "a" * 40, "date": datetime(2026, 3, 2, 0, 0, 5, tzinfo=timezone.utc), "message": "Fix typo (#3)"}
+    assert detect.detect(pr3, [pr3], [later], "o/r")["named_fix"] is True
+    assert detect.detect(pr3, [pr3], [own], "o/r")["named_fix"] is False   # its own merge commit
+
+
+def test_summarize_zero_denominator_is_no_data():
+    s = stats.summarize(0, 0)
+    assert s["rate"] is None and s["ci95"] is None and s["no_data"] is True
+    assert stats.summarize(1, 4)["no_data"] is False
+    res = run(samefile=False)
+    assert res["summary"]["same_file_weak"]["rate"] is None
+    out = render.render(res, "text")
+    assert "no data" in out and "0.0%" not in out.split("same-file")[1].split("\n")[0]
+    assert json.loads(render.render(res, "json"))["summary"]["same_file_weak"]["ci95"] is None
+
+
+def test_full_name_references_count_toward_changelog_cutoff():
+    pr = {"number": 3, "merged_at": datetime(2026, 3, 2, tzinfo=timezone.utc), "merge_sha": "z" * 40,
+          "title": "t", "body": ""}
+    body = "Fix thing for o/r#3\n" + " ".join("o/r#%d" % i for i in range(10, 16))
+    assert not detect.named_fix_hits({"title": "Release notes", "body": body}, pr, "o/r")
+    assert detect.any_ref_numbers("o/r#5 x/y#6 O/R#7 C#8", "o/r") == {"5", "7"}
+    other = " ".join("x/y#%d" % i for i in range(10, 20))   # other repos' numbers do not count
+    assert detect.named_fix_hits({"title": "Fix thing (#3)", "body": other}, pr, "o/r")

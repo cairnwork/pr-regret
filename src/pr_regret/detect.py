@@ -23,13 +23,15 @@ FIX_RE = re.compile(
 RELEASE_EVENT_RE = re.compile(r"^\W*(?:chore(?:\([^)]*\))?:\s*)?(?:release|bump version|version bump)\b", re.I)
 CHANGELOG_LINE_RE = re.compile(r"\bby @[\w-]+ in https?://|^\s*[*-]\s*@[\w-]+ made their first contribution", re.I)
 BACKPORT_RE = re.compile(r"\b(back-?port(?:s|ed|ing)?|cherry[- ]?pick(?:s|ed)?)\b", re.I)
-ANY_REF_RE = re.compile(r"(?<![\w/.#-])#(\d+)(?![\w])|(?<![\w.-])https?://(?:www\.)?github\.com/([\w.-]+/[\w.-]+)/pull/(\d+)(?![\w])", re.I)
+ANY_REF_RE = re.compile(
+    r"(?<![\w/.#-])#(\d+)(?![\w])"
+    r"|(?<![\w.-])https?://(?:www\.)?github\.com/([\w.-]+/[\w.-]+)/pull/(\d+)(?![\w])"
+    r"|(?<![\w/.#-])([\w.-]+/[\w.-]+)#(\d+)(?![\w])", re.I)
 RELEASE_BRANCH_RE = re.compile(r"(\[(?:release|servicing|backport)[^\]]*\]|\b(?:release|servicing)/v?\d)", re.I)
 PORT_TITLE_RE = re.compile(r"\(#\d+\)\s*\(#\d+\)\s*$")  # "Title (#orig) (#port)": a cherry-pick / forward port
 MAX_REFS = 4  # an event citing more PR numbers than this is a changelog / release / batch, not a fix
 REVERT_RE = re.compile(r"\brevert(?:s|ed|ing)?\b", re.I)
 REVERTS_COMMIT_RE = re.compile(r"this reverts commit\s+([0-9a-f]{7,40})", re.I)
-SELF_NUM_RE = re.compile(r"\(#(\d+)\)\s*$")
 
 # Files that change on almost every PR and say nothing about "the same change".
 NOISE_FILES = {
@@ -56,8 +58,11 @@ def any_ref_numbers(text: str, repo: str | None = None) -> set[str]:
     for m in ANY_REF_RE.finditer(text or ""):
         if m.group(1):
             out.add(m.group(1))
-        elif repo is None or m.group(2).lower() == repo.lower():
-            out.add(m.group(3))
+        elif m.group(2):
+            if repo is None or m.group(2).lower() == repo.lower():
+                out.add(m.group(3))
+        elif repo is None or m.group(4).lower() == repo.lower():
+            out.add(m.group(5))
     return out
 
 
@@ -135,10 +140,7 @@ def _events(prs: list[dict], commits: list[dict]) -> list[dict]:
     for c in commits:
         lines = (c["message"] or "").split("\n", 1)
         title, body = lines[0], (lines[1] if len(lines) > 1 else "")
-        selfn = pr_shas.get(c["sha"])
-        if selfn is None:
-            m = SELF_NUM_RE.search(title)
-            selfn = int(m.group(1)) if m else None
+        selfn = pr_shas.get(c["sha"])  # a commit is "self" only if it IS a known PR's merge commit
         out.append({"time": c["date"], "title": title, "body": body, "self": selfn,
                     "sha": c["sha"], "src": "commit"})
     return out
