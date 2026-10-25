@@ -13,7 +13,9 @@ def wilson(k: int, n: int, z: float = 1.959964) -> tuple[float, float]:
     denom = 1 + z2 / n
     centre = (p + z2 / (2 * n)) / denom
     half = z * math.sqrt(p * (1 - p) / n + z2 / (4 * n * n)) / denom
-    return (max(0.0, centre - half), min(1.0, centre + half))
+    lo = 0.0 if k == 0 else max(0.0, centre - half)
+    hi = 1.0 if k == n else min(1.0, centre + half)
+    return (lo, hi)
 
 
 def summarize(k: int, n: int) -> dict:
