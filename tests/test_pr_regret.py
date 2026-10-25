@@ -37,6 +37,12 @@ def test_wilson_known_values():
     assert (round(lo, 3), round(hi, 3)) == (0.056, 0.078)
 
 
+def test_wilson_exact_bounds_at_extremes():
+    assert stats.wilson(10, 10)[1] == 1.0
+    assert stats.wilson(1, 1)[1] == 1.0
+    assert stats.wilson(0, 10)[0] == 0.0
+
+
 def test_revert_by_pr_reference_and_by_commit_sha():
     r = by_pr(run())
     assert r[1]["revert"] is True      # PR 2 "Reverts o/r#1"
