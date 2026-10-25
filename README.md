@@ -1,6 +1,6 @@
 # pr-regret
 
-**English.** How often do merged pull requests show a revert or a named fix within 7 days? `pr-regret` reads the **public GitHub API** (or any repo your own token can read) with **no model calls**, and for each merged PR answers three yes/no questions about the 7 days after merge: was it **reverted**, was it **named in a fix / follow-up**, did another merged PR **touch the same files** (weak signal, reported separately). It prints the share (a **heuristic trace rate**) with a Wilson 95% interval, and can restrict to agent-authored PRs. Standard library only, Python 3.10+.
+**English.** `pr-regret` reads the **public GitHub API** (or any repo your own token can read) with **no model calls** to measure a **heuristic trace rate** for merged pull requests within 7 days. For each merged PR, it answers three yes/no questions about the 7 days after merge: was it **reverted**, was it **named in a fix / follow-up**, and did another merged PR **touch the same files** (weak signal, reported separately). It prints the share with a Wilson 95% interval, and can restrict to agent-authored PRs. Standard library only, Python 3.10+.
 
 **中文。** 「合併後 7 天內留下 revert 或指名修正痕跡的 PR 有多少？」`pr-regret` 只讀公開的 GitHub API（或你自己的 token 讀得到的 repo），**不呼叫任何模型**，對每張已合併 PR 回答三個是非題：7 天內有沒有被 **revert**、有沒有被後續 PR／commit **指名修正**、有沒有別的合併 PR **改到同一批檔案**（弱訊號，分開報）。輸出「啟發式留痕訊號率」與 Wilson 95% 區間，可只看 AI 代理寫的 PR。只用標準庫，Python 3.10 以上。
 
